@@ -1,7 +1,8 @@
 
 
 body {
-  background-color: yellow;
+  background-color: #242424;
+  /* background-image: url(/images/pexels-engin-akyurt-1591x1061.jpg); */
 }
 
 .app-flex {
@@ -14,13 +15,20 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  background-color: rgb(204, 171, 171);
+  /* background-color: rgb(204, 171, 171); */
+  color: #fff
+}
+
+main {
+  flex-grow: 2;
 }
 
 .app-footer {
   width: 100%;
   margin: auto 0 0 0;
-  background-color: rgb(133, 115, 115);
+  background-color: #242424;
+  /* border: red solid 1px; */
+  color: #ccc;
 }
 
 .form-control {
@@ -28,21 +36,103 @@ body {
   margin: 1rem auto;
 }
 
-.search-results-container {
-  border: black 1px solid;
-  min-height: 30vh;
+.max-nominees-banner {
+  display: block;
+  text-align: center;
+  margin: 1rem auto;
+}
+
+.search-results-container,
+.nomination-list {
+  /* border: black 1px solid; */
+  border: white 1px solid;
+  min-height: 70vh;
+}
+
+
+.results-title {
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  /* vertical-align: middle; */
 }
 
 .ticker-container {
   height: 6vh;
+  margin-bottom: 20px;
 }
 
 header {
   width: 100%;
-  background-color: rgb(94, 170, 170);
+  background-color: #242424;
+  color:gold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
 }
 
 .footer-bottom {
   height: 3vh;
   text-align: center;
+}
+
+.ticker-wrapper {
+  font-family: 'Roboto', sans-serif;
+  /* position: relative; */
+  /* max-width: 800px; */
+  width: 90vw;
+  margin: auto;
+  /* padding-top: 200px; */
+  background-color: teal;
+}
+
+.bigHeading {
+  display: block;
+  position: absolute;
+  height: 4rem;
+  font-style: italic;
+  font-size: 20px;
+  background: #d40b0b;
+  color:#fff;
+  text-transform: uppercase;
+  padding: 15px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+
+
+.text-update {
+  height: 4rem;
+  background: #004fff;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 25px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  left: 12px
+}
+
+.text-update p {
+  position: absolute;
+  width: 300%;
+  margin: 0;
+  font-weight: 700;
+  text-align: left;
+  transform: translateX(100%);
+  animation: moving 30s linear infinite;
+}
+
+@keyframes moving{
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(-100%);
+  }
 }

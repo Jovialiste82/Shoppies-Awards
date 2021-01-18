@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import MY_OMDB_API_KEY from './apikey'
 import { Container, Row, Col } from 'react-bootstrap'
 import Header from './components/Header'
+import MaxNomineesBanner from './components/MaxNomineesBanner'
 import SearchBox from './components/SearchBox'
 import SearchResults from './components/SearchResults';
 import MyNominees from './components/MyNominees';
@@ -16,14 +16,10 @@ function App() {
   const [searchValue, setSearchValue] = useState([])
 
 
-  // const MY_KEY = 'HIDDEN_IN_NETLIFY_CONFIG'
-  // const MY_KEY = '9a0397d9'
-  const MY_KEY = MY_OMDB_API_KEY
-
-
   const getMovieRequest = async (searchValue) => {
    
-    const url = `http://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=${MY_KEY}`
+    const url = `https://shoppiesawardsapibyphilippe.herokuapp.com/api/search?search=${searchValue}`
+    // console.log(url)
     const response = await fetch(url)
     const responseJson = await response.json()
     if(responseJson.Search) {
@@ -34,7 +30,7 @@ function App() {
 
   useEffect(() => {
     getMovieRequest(searchValue)
-    console.log(movies)
+    // console.log(movies)
   }, [searchValue])
 
 
@@ -42,6 +38,7 @@ function App() {
     const savedNominees = JSON.parse(localStorage.getItem('shoppies-nominees'))
     if(savedNominees !== null) {
       setNominees(savedNominees)
+      console.log(nominees)
     }
   }, [])
 
@@ -61,16 +58,20 @@ function App() {
     saveToLocalStorage(newNomineesList)
   }
 
+
   return (
     <div className='app-flex'>
         <Header />
         <main>
           <Container>
-          <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+          {nominees.length === 5 
+          ? (<MaxNomineesBanner />)
+          : (<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />)}        
           <Row>
             <Col>
               <SearchResults 
                 movies={movies} 
+                nominees={nominees}
                 handleNominationClick={nominateMovie}
               />
             </Col>
@@ -83,18 +84,9 @@ function App() {
           </Row>
           </Container>
         </main>
-        <Footer />
+        <Footer nominees={nominees} />
     </div>
   );
 }
 
 export default App;
-
-
-// <Header />
-//   <SearchBox />
-// <Main />
-//   <SearchResults />
-//   <NominationPanel />
-// <BoxOfficeTicker />
-// <Footer />

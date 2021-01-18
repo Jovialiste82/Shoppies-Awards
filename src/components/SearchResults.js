@@ -4,15 +4,19 @@ import { Container, Col, Row, Button, Card } from 'react-bootstrap'
 const SearchResults = (props) => {
   return (
       <div className="search-results-container">
-        <h2>Results</h2>
+        <div className='results-title'>
+          <h4>Results</h4>
+        </div>
         <div className='search-results'>
           {props.movies.map((movie, index) => (
-              <Row>
-                <Col>{`${movie.Title} (${movie.Year})`}</Col>
-                <Col>
-                  <Button onClick={() => props.handleNominationClick(movie)}>
-                    Nominate
-                  </Button>
+              <Row className="mb-2">
+                <Col className="ml-3">{`${movie.Title} (${movie.Year})`}</Col>
+                <Col>           
+                  {props.nominees.length === 5 
+                   ? (<Button variant="warning">Disabled</Button>) 
+                   : props.nominees.find(m => m.imdbID === movie.imdbID)
+                   ? (<Button variant="success">Added</Button>) 
+                   : (<Button onClick={() => props.handleNominationClick(movie)}>Nominate</Button>)}
                 </Col>
               </Row>
             ))}
@@ -22,11 +26,4 @@ const SearchResults = (props) => {
 }
 
 export default SearchResults
-// style={{ margin: '1rem', width: '200px' }}
-              // <Card >
-              //   <Card.Body>
-              //     <Card.Title>{movie.Title}</Card.Title>
-              //     <Card.Text>{movie.Year}</Card.Text>
-              //     <Button variant="primary">Nominate</Button>
-              //   </Card.Body>
-              // </Card>
+
