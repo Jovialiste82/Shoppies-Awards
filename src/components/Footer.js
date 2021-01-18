@@ -10,7 +10,9 @@ const Footer = ({nominees}) => {
         <BoxOfficeTicker nominees={nominees}/>
       </div>
       <div className='footer-bottom'>
-        <span>By Philippe Charpentier</span>
+        <span>By Philippe Charpentier (
+          <a href="https://github.com/Jovialiste82/Shoppies-Awards">Github</a> | <a href="https://github.com/Jovialiste82/API-Shoppies-Awards">API</a>)
+        </span>
       </div>
     </footer>
   )
